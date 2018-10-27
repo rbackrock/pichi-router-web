@@ -1,5 +1,5 @@
 import ajax from 'axios';
-import storage from '@common/tools/storage';
+import { storage } from '@common/utils';
 import _ from 'lodash';
 
 const globalConfig = {

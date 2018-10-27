@@ -1,5 +1,5 @@
 import axios from 'axios'
-import storage from '@common/tools/storage';
+import { storage } from '@common/utils';
 
 axios.get(process.env.PUBLIC_URL + '/network.json').then(rsp => {
   const {
