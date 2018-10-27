@@ -4,7 +4,7 @@
 
 React16 + Router4 + Redux + Antd 实现
 
-该项目只完成部分功能，等待 Pichi 项目更新
+该项目只完成部分功能，等待 [Pichi](https://github.com/pichi-router/pichi) 项目更新
 
 ### 运行
 首先先执行 Pichi 项目
