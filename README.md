@@ -11,7 +11,7 @@ React16 + Router4 + Redux + Antd 实现
 
 然后自行设置代理
 
-http://localhost:[该项目运行端口号]/api/* 映射为 http://localhost:[pichi项目运行端口号]/
+`http://localhost:[该项目运行端口号]/api/* 映射为 http://localhost:[pichi项目运行端口号]/`
 
 在项目根目录执行
 
