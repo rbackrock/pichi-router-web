@@ -1,0 +1,219 @@
+{
+  "additionalProp1": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp2": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp3": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp4": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp5": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp6": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp7": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp8": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp9": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp10": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp11": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp12": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp13": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp14": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp15": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp16": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp17": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp18": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp19": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp20": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp21": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp22": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp23": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp24": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp25": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp26": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp27": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp28": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp29": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp30": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  },
+  "additionalProp31": {
+    "port": 8388,
+    "method": "rc4-md5",
+    "password": "ss password",
+    "type": "http",
+    "bind": "0.0.0.0"
+  }
+}
