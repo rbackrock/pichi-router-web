@@ -62,7 +62,7 @@ class Egresses extends PureComponent {
         render: (text, record) => (
           <span>
             <Antd.Button size="small" onClick={(evt) => this.handleModifyEgresses(evt, text, record)}>Edit</Antd.Button>
-              <Divider type="vertical" />
+            <Divider type="vertical" />
             <Antd.Button size="small" onClick={(evt) => this.handleDeleteEgresses(evt, text, record)}>Delete</Antd.Button>
           </span>
         )
