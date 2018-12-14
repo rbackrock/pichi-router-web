@@ -9,7 +9,6 @@ import Antd, {
   message,
   Modal
 } from 'antd';
-import './ingress.scss';
 import IngressRecordForm from './components/ingressForm';
 import { helper } from '@common/utils';
 
