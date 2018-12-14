@@ -25,3 +25,7 @@ export const saveRules = (formValue) => {
 
   return axios.put(`/rules/${ruleName}`, formBody);
 };
+
+export const deleteRules = (rulesName) => {
+  return axios.delete(`/rules/${rulesName}`);
+};

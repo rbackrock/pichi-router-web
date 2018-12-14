@@ -6,6 +6,7 @@ import * as actionCreator from "../rules/store/actionCreator";
 import RulesForm from '../rules/components/rulesForm';
 import { helper } from '@common/utils';
 
+const confirm = Modal.confirm;
 const RulesFormModal = Form.create()(RulesForm);
 
 class Rules extends PureComponent {
@@ -76,7 +77,7 @@ class Rules extends PureComponent {
           <span>
             <Antd.Button size="small" >Edit</Antd.Button>
             <Divider type="vertical" />
-            <Antd.Button size="small" >Delete</Antd.Button>
+            <Antd.Button size="small" onClick={(evt) => this.handleDeleteRules(evt, record.name)} >Delete</Antd.Button>
           </span>
         )
       }
@@ -86,6 +87,7 @@ class Rules extends PureComponent {
     this.handleShowRulesForm = this.handleShowRulesForm.bind(this);
     this.handleSaveRules = this.handleSaveRules.bind(this);
     this.handleCancelRules = this.handleCancelRules.bind(this);
+    this.handleDeleteRules = this.handleDeleteRules.bind(this);
   }
 
   render() {
@@ -164,6 +166,23 @@ class Rules extends PureComponent {
     const form = this.formRef.props.form;
     form.resetFields();
     this.props.actions.changeRulesFormModalVisible(false);
+  }
+
+  handleDeleteRules(evt, ruleName) {
+    confirm({
+      title: 'Operation',
+      content: 'Do you want to delete this item ?',
+      onOk: () => {
+        this.props.actions.delteRules(ruleName).then(rsp => {
+          message.success('successfully');
+          this.fetchRules();
+          return Promise.resolve();
+        }, error => {
+          message.error(error.errMsg);
+          return Promise.reject();
+        });
+      }
+    });
   }
 }
 

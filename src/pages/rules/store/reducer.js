@@ -10,6 +10,9 @@ const defaultState = fromJS({
 
   saveRulesPending: false,
   saveRulesError: null,
+
+  deleteRulesPending: false,
+  deleteRulesError: null
 });
 
 export default (state = defaultState, action) => {
@@ -46,6 +49,21 @@ export default (state = defaultState, action) => {
       return state.merge({
         saveRulesPending: false,
         saveRulesError: action.err
+      });
+    case actionTypes.DELETE_RULES_BEGIN:
+      return state.merge({
+        deleteRulesPending: true,
+        deleteRulesError: null
+      });
+    case actionTypes.DELETE_RULES_SUCCESS:
+      return state.merge({
+        deleteRulesPending: false,
+        deleteRulesError: null
+      });
+    case actionTypes.DELETE_RULES_FAILURE:
+      return state.merge({
+        deleteRulesPending: false,
+        deleteRulesError: action.err
       });
     default:
       return state

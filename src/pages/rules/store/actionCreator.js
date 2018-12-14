@@ -8,7 +8,6 @@ export const changeRulesFormModalVisible = (isVisible) => ({
   isVisible
 });
 
-
 export function fetchRules() {
   return dispatch => {
     dispatch({
@@ -57,3 +56,24 @@ export function saveRules(formData) {
   }
 }
 
+export function delteRules(ruleName) {
+  return dispatch => {
+    dispatch({
+      type: actionTypes.DELETE_RULES_BEGIN
+    });
+
+    return new Promise((resolve, reject) => {
+      rulesService.deleteRules(ruleName).then(rsp => {
+        dispatch({
+          type: actionTypes.DELETE_RULES_SUCCESS
+        });
+        resolve(rsp);
+      }, error => {
+        dispatch({
+          type: actionTypes.DELETE_RULES_FAILURE
+        });
+        reject(error);
+      });
+    });
+  };
+}
