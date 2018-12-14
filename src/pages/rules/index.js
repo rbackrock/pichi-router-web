@@ -148,7 +148,14 @@ class Rules extends PureComponent {
     const form = this.formRef.props.form;
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('guo')
+        this.props.actions.saveRules(values).then(rsp => {
+          message.success('successfully');
+          form.resetFields();
+          this.props.actions.changeRulesFormModalVisible(false);
+          this.fetchRules();
+        }, error => {
+          message.error(error.errMsg);
+        });
       }
     });
   }

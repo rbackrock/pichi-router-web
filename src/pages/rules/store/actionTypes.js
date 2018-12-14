@@ -3,3 +3,7 @@ export const CHANGE_RULES_FORM_MODAL_VISIBLE = 'rules/change_rules_form_modal_vi
 export const FETCH_RULES_BEGIN = 'rules/fetch_rules_begin';
 export const FETCH_RULES_SUCCESS = 'rules/fetch_rules_success';
 export const FETCH_RULES_FAILURE = 'rules/fetch_rules_failure';
+
+export const SAVE_RULES_BEGIN = 'rules/save_rules_begin';
+export const SAVE_RULES_SUCCESS = 'rules/save_rules_success';
+export const SAVE_RULES_FAILURE = 'rules/save_rules_failure';

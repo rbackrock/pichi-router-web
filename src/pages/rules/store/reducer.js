@@ -6,7 +6,10 @@ const defaultState = fromJS({
 
   fetchRulesListPending: false,
   fetchRulesListError: null,
-  fetchRulesList: []
+  fetchRulesList: [],
+
+  saveRulesPending: false,
+  saveRulesError: null,
 });
 
 export default (state = defaultState, action) => {
@@ -28,6 +31,21 @@ export default (state = defaultState, action) => {
       return state.merge({
         fetchRulesListPending: false,
         fetchRulesListError: action.err
+      });
+    case actionTypes.SAVE_RULES_BEGIN:
+      return state.merge({
+        saveRulesPending: true,
+        saveRulesError: null
+      });
+    case actionTypes.SAVE_RULES_SUCCESS:
+      return state.merge({
+        saveRulesPending: false,
+        saveRulesError: null
+      });
+    case actionTypes.SAVE_RULES_FAILURE:
+      return state.merge({
+        saveRulesPending: false,
+        saveRulesError: action.err
       });
     default:
       return state
