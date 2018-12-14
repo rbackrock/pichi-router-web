@@ -103,9 +103,6 @@ class Rules extends PureComponent {
             type="dashed"
             onClick={this.handleOnLoadList}
           >Reload</Antd.Button>
-
-          <Antd.Button onClick={() => this.handleTest()}>Test</Antd.Button>
-
         </div>
         <Table
           columns={this.cols}
@@ -139,24 +136,6 @@ class Rules extends PureComponent {
     });
   }
 
-  handleTest() {
-    let form = this.formRef.props.form;
-    const json = '{"rangeKeys":["initRangeKey","6128fa70-ff67-11e8-be5e-5b4805779716"],"range":{"initRangeKey":"123","6128fa70-ff67-11e8-be5e-5b4805779716":"456"}}';
-    this.props.actions.changeRulesFormModalVisible(true);
-    form.setFieldsValue({
-      // rangeKeys: ["0","1"]
-      rangeKeys: ["initRangeKey","6128fa70-ff67-11e8-be5e-5b4805779716"]
-    });
-
-    window.setTimeout(() => {
-      console.log(form.getFieldValue('range'))
-
-      form.setFieldsValue({
-        range: ['456', '123']
-      });
-    }, 1000);
-  }
-
   handleOnLoadList() {
     this.fetchRules();
   }
@@ -168,7 +147,9 @@ class Rules extends PureComponent {
   handleSaveRules() {
     const form = this.formRef.props.form;
     form.validateFieldsAndScroll((err, values) => {
-      console.log(JSON.stringify(values));
+      if (!err) {
+        console.log('guo')
+      }
     });
   }
 
