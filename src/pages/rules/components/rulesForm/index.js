@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {Form, Input, Button, Modal, Select, Icon} from "antd";
+import { Form, Input, Modal } from "antd";
 import { actionCreator } from '../../store';
 import { bindActionCreators } from "redux";
 
@@ -14,10 +14,6 @@ import CountryCodeFormItem from './countryCodeFormItem';
 const FormItem = Form.Item;
 
 class RulesForm extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       visible,

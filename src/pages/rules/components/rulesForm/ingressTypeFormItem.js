@@ -10,10 +10,6 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 
 class IngressTypeFormItem extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { formItemCommonLayout, formItemLayoutWithOutLabel } = this.props;
     const keysName = 'ingress_typeKeys',

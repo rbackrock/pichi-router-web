@@ -8,10 +8,6 @@ import uuid from 'uuid/v1';
 const FormItem = Form.Item;
 
 class RangeFormItem extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { formItemCommonLayout, formItemLayoutWithOutLabel } = this.props;
     const keysName = 'rangeKeys',
