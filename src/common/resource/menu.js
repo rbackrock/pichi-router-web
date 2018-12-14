@@ -12,11 +12,11 @@ export default [
     key: '/egresses'
   },
   {
-    title: 'Routes',
-    key: '/routes'
-  },
-  {
     title: 'Rules',
     key: '/rules'
+  },
+  {
+    title: 'Routes',
+    key: '/routes'
   }
 ];
