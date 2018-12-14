@@ -14,7 +14,7 @@ class CountryCodeFormItem extends PureComponent {
 
   render() {
     const { formItemCommonLayout, formItemLayoutWithOutLabel } = this.props;
-    const keysName = 'countryCodeKeys',
+    const keysName = 'countryKeys',
       fieldName = 'country';
     const { getFieldDecorator, getFieldValue } = this.props.form;
     getFieldDecorator(keysName, { initialValue: ['initCountryCode'] });

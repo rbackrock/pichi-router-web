@@ -16,7 +16,7 @@ class IngressTypeFormItem extends PureComponent {
 
   render() {
     const { formItemCommonLayout, formItemLayoutWithOutLabel } = this.props;
-    const keysName = 'ingressTypeKeys',
+    const keysName = 'ingress_typeKeys',
       fieldName = 'ingress_type';
     const { getFieldDecorator, getFieldValue } = this.props.form;
     getFieldDecorator(keysName, { initialValue: ['initIngressType'] });
