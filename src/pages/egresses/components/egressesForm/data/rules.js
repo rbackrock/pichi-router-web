@@ -1,7 +1,9 @@
 export const name = [
   {
     required: true,
-    whitespace: true
+    whitespace: true,
+    pattern: /^\w+$/,
+    message: 'name only supports letters, numbers, underscores'
   }
 ];
 

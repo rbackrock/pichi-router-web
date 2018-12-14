@@ -47,7 +47,8 @@ class RulesForm extends PureComponent {
                 rules: [{
                   required: true,
                   whitespace: true,
-                  message: "Please input rules name."
+                  pattern: /^\w+$/,
+                  message: 'name only supports letters, numbers, underscores'
                 }]
               })(<Input placeholder="Please input rules name." style={{ width: '80%', marginRight: 8 }}/>)
             }
