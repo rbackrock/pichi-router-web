@@ -46,6 +46,7 @@ class RulesForm extends PureComponent {
               form.getFieldDecorator('name', {
                 rules: [{
                   required: true,
+                  whitespace: true,
                   message: "Please input rules name."
                 }]
               })(<Input placeholder="Please input rules name." style={{ width: '80%', marginRight: 8 }}/>)
