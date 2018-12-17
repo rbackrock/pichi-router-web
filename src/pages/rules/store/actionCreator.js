@@ -1,7 +1,5 @@
 import * as actionTypes from './actionTypes';
 import * as rulesService from '@service/rules';
-import { fromJS } from 'immutable';
-import { helper } from '@common/utils';
 
 export const changeRulesFormModalVisible = (isVisible) => ({
   type: actionTypes.CHANGE_RULES_FORM_MODAL_VISIBLE,
