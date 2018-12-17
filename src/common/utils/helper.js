@@ -11,3 +11,12 @@ export function delayFunction(fn) {
   const time = 333;
   window.setTimeout(fn, time);
 }
+
+export function swapArrayItem(arr, originIndex, newIndex) {
+  const originVal = arr[originIndex];
+  const newVal = arr[newIndex];
+  arr[originIndex] = newVal;
+  arr[newIndex] = originVal;
+
+  return arr;
+}
