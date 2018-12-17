@@ -1,0 +1,13 @@
+.dynamic-button {
+  cursor: pointer;
+  position: relative;
+  top: 4px;
+  font-size: 20px;
+  color: #999;
+  transition: all .3s;
+  padding: 0 10px;
+}
+
+.dynamic-button:hover {
+  color: #1585ff;
+}
