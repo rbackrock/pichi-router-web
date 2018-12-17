@@ -100,7 +100,7 @@ class EgressesForm extends PureComponent {
         formItemCommonLayout,
         item: {
           key: 'name',
-          label: 'name',
+          label: 'Name',
         },
         fieldDecorator: {
           fieldName: 'name',
