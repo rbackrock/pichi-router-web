@@ -191,7 +191,7 @@ class Ingress extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    ingressList: state.getIn(['ingress','fetchIngressList']),
+    ingressList: state.getIn(['ingress', 'fetchIngressList']),
     fetchIngressListPending: state.getIn(['ingress','fetchIngressListPending']),
     ingressFormModalVisible: state.getIn(['ingress', 'ingressFormModalVisible'])
   };
