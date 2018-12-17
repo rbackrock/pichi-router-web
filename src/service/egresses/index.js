@@ -1,7 +1,13 @@
 import { axios } from '@http';
+import { helper } from '@common/utils';
 
 export const getEgressesList = () => {
-  return axios.get('/egresses');
+  return new Promise((resolve, reject) => {
+    axios.get('/egresses').then(rsp => {
+      const egressesData = helper.convertObjectsToArray(rsp.data, ['direct']);
+      resolve(egressesData);
+    }, error => reject(error));
+  });
 };
 
 export const deleteEgresses = (name) => {

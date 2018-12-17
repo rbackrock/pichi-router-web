@@ -1,8 +1,13 @@
 import { axios } from '@http';
+import { helper } from '@common/utils';
 
 export const getIngressList = () => {
-  // return axios.get(process.env.PUBLIC_URL + '/mock/ingresses.json');
-  return axios.get('/ingresses');
+  return new Promise((resolve, reject) => {
+    axios.get('/ingresses').then(rsp => {
+      const ingressData = helper.convertObjectsToArray(rsp.data);
+      resolve(ingressData, rsp);
+    }, error => reject(error));
+  });
 };
 
 export const saveIngress = (formData) => {

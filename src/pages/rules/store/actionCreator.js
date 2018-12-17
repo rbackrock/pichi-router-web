@@ -15,13 +15,11 @@ export function fetchRules() {
     });
 
     return new Promise((resolve, reject) => {
-      rulesService.getRulesList().then(rsp => {
-        const rulesData = helper.convertObjectsToArray(rsp.data);
+      rulesService.getRulesList().then(rulesData => {
         dispatch({
           type: actionTypes.FETCH_RULES_SUCCESS,
-          rulesList: fromJS(rulesData)
+          rulesList: rulesData
         });
-        resolve(rsp);
       }, error => {
         dispatch({
           type: actionTypes.FETCH_RULES_FAILURE,
@@ -40,11 +38,11 @@ export function saveRules(formData) {
     });
 
     return new Promise((resolve, reject) => {
-      rulesService.saveRules(formData).then(rsp => {
+      rulesService.saveRules(formData).then(() => {
         dispatch({
           type: actionTypes.SAVE_RULES_SUCCESS
         });
-        resolve(rsp);
+        resolve();
       }, error => {
         dispatch({
           type: actionTypes.SAVE_RULES_FAILURE,
@@ -63,11 +61,11 @@ export function delteRules(ruleName) {
     });
 
     return new Promise((resolve, reject) => {
-      rulesService.deleteRules(ruleName).then(rsp => {
+      rulesService.deleteRules(ruleName).then(() => {
         dispatch({
           type: actionTypes.DELETE_RULES_SUCCESS
         });
-        resolve(rsp);
+        resolve();
       }, error => {
         dispatch({
           type: actionTypes.DELETE_RULES_FAILURE

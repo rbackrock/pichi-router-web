@@ -32,7 +32,7 @@ export default (state = defaultState, action) => {
       return state.merge({
         fetchEgressesListPending: false,
         fetchEgressesError: null,
-        fetchEgressesList: action.egressesList
+        fetchEgressesList: fromJS(action.egressesList)
       });
     case actionTypes.FETCH_EGRESSES_FAILURE:
       return state.merge({

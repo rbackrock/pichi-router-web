@@ -1,8 +1,14 @@
 import { axios } from '@http';
 import _ from 'lodash';
+import { helper } from '@common/utils';
 
 export const getRulesList = () => {
-  return axios.get('/rules');
+  return new Promise((resolve, reject) => {
+    axios.get('/rules').then(rsp => {
+      const rulesData = helper.convertObjectsToArray(rsp.data);
+      resolve(rulesData);
+    }, error => reject(error));
+  });
 };
 
 export const saveRules = (formValue) => {

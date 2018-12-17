@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes';
 import * as egressesService from '@service/egresses';
-import { fromJS } from 'immutable';
 import { helper } from '@common/utils';
 
 export const changeEgressesFormModalVisible = (isVisible) => ({
@@ -20,13 +19,11 @@ export function fetchEgresses() {
     });
 
     return new Promise((resolve, reject) => {
-      egressesService.getEgressesList().then(rsp => {
-        const egressesData = helper.convertObjectsToArray(rsp.data, ['direct']);
+      egressesService.getEgressesList().then(egressesData => {
         dispatch({
           type: actionTypes.FETCH_EGRESSES_SUCCESS,
-          egressesList: fromJS(egressesData)
+          egressesList: egressesData
         });
-        resolve(rsp);
       }, error => {
         dispatch({
           type: actionTypes.FETCH_EGRESSES_FAILURE,
@@ -45,11 +42,11 @@ export function deleteEgresses(name) {
     });
 
     return new Promise((resolve, reject) => {
-      egressesService.deleteEgresses(name).then(rsp => {
+      egressesService.deleteEgresses(name).then(() => {
         dispatch({
           type: actionTypes.DELETE_EGRESSES_SUCCESS
         });
-        resolve(rsp);
+        resolve();
       }, error => {
         dispatch({
           type: actionTypes.DELETE_EGRESSES_FAILURE,
@@ -68,11 +65,11 @@ export function saveEgresses(formData) {
     });
 
     return new Promise((resolve, reject) => {
-      egressesService.saveEgresses(formData).then(rsp => {
+      egressesService.saveEgresses(formData).then(() => {
         dispatch({
           type: actionTypes.SAVE_EGRESSES_SUCCESS
         });
-        resolve(rsp);
+        resolve();
       }, error => {
         dispatch({
           type: actionTypes.SAVE_EGRESSES_FAILURE,

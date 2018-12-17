@@ -28,7 +28,7 @@ export default (state = defaultState, action) => {
       return state.merge({
         fetchIngressListPending: false,
         fetchIngressListError: null,
-        fetchIngressList: action.ingressList,
+        fetchIngressList: fromJS(action.ingressList),
       });
     case actionTypes.FETCH_INGRESS_LIST_FAILURE:
       return state.merge({

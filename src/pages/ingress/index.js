@@ -139,7 +139,7 @@ class Ingress extends PureComponent {
     const form = this.formRef.props.form;
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.actions.saveIngress(values).then(rsp => {
+        this.actions.saveIngress(values).then(() => {
           message.success('successfully');
           form.resetFields();
           this.actions.changeIngressFormModalVisible(false);

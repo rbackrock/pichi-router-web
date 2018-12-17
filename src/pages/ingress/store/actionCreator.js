@@ -1,7 +1,5 @@
 import * as actionTypes from './actionTypes';
 import * as ingressService from '@service/ingress';
-import { fromJS } from 'immutable';
-import { helper } from '@common/utils';
 
 export function fetchIngressList() {
   return dispatch => {
@@ -10,13 +8,11 @@ export function fetchIngressList() {
     });
 
     return new Promise((resolve, reject) => {
-      ingressService.getIngressList().then(rsp => {
-        const ingressData = helper.convertObjectsToArray(rsp.data);
+      ingressService.getIngressList().then(ingressData => {
         dispatch({
           type: actionTypes.FETCH_INGRESS_LIST_SUCCESS,
-          ingressList: fromJS(ingressData)
+          ingressList: ingressData
         });
-        resolve(rsp);
       }, error => {
         dispatch({
           type: actionTypes.FETCH_INGRESS_LIST_FAILURE,
@@ -35,11 +31,11 @@ export function saveIngress(formData) {
     });
 
     return new Promise((resolve, reject) => {
-      ingressService.saveIngress(formData).then(rsp => {
+      ingressService.saveIngress(formData).then(() => {
         dispatch({
           type: actionTypes.SAVE_INGRESS_SUCCESS
         });
-        resolve(rsp);
+        resolve();
       }, error => {
         dispatch({
           type: actionTypes.SAVE_INGRESS_FAILURE,
@@ -63,11 +59,11 @@ export function deleteIngress(name) {
     });
 
     return new Promise((resolve, reject) => {
-      ingressService.deleteIngress(name).then(rsp => {
+      ingressService.deleteIngress(name).then(() => {
         dispatch({
           type: actionTypes.DELETE_INGRESS_SUCCESS
         });
-        resolve(rsp);
+        resolve();
       }, error => {
         dispatch({
           type: actionTypes.DELETE_INGRESS_FAILURE,

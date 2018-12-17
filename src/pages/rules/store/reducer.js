@@ -28,7 +28,7 @@ export default (state = defaultState, action) => {
       return state.merge({
         fetchRulesListPending: false,
         fetchRulesListError: null,
-        fetchRulesList: action.rulesList
+        fetchRulesList: fromJS(action.rulesList)
       });
     case actionTypes.FETCH_RULES_FAILURE:
       return state.merge({
