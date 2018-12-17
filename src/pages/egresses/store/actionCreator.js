@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes';
 import * as egressesService from '@service/egresses';
-import { helper } from '@common/utils';
 
 export const changeEgressesFormModalVisible = (isVisible) => ({
   type: actionTypes.CHANGE_EGRESSES_FORM_MODAL_VISIBLE,
