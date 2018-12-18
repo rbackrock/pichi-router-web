@@ -1,5 +1,5 @@
 {
-  "name": "pichi-router-web-ui",
+  "name": "pichi-router-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
