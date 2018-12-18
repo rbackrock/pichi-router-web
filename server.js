@@ -2,10 +2,10 @@ const proxy = require('http-proxy-middleware');
 const express = require('express');
 const connectHistoryApiFallback = require('connect-history-api-fallback');
 
-exports.run = () => {
+exports.run = (port) => {
   const app = express();
   const proxyOption = proxy({
-    target: 'http://[::1]:8000',
+    target: `http://[::1]:${port}`,
     pathRewrite: {
       '^/api': ''
     },
@@ -20,7 +20,9 @@ exports.run = () => {
   app.use('/', express.static('build'));
   app.use('/api', proxyOption);
 
-  app.listen(3000);
-  console.log('pichi ui is running...');
-  require('opn')('http://localhost:3000/');
+  const server = app.listen(0, () => {
+    console.log('pichi ui is running...');
+    console.log(`Please visit: http://localhost:${server.address().port} or http://[::1]:${server.address().port}`);
+    require('opn')(`http://localhost:${server.address().port}/`);
+  });
 };
