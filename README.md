@@ -9,4 +9,4 @@
 
 在项目根目录执行
 
-`yarn run start -p [pichi端口号]` 或者 `npm run start -p [pichi端口号]` 
+`yarn run start -p [pichi的端口号]` 或者 `npm run start -p [pichi的端口号]` 
