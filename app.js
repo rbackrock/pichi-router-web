@@ -32,14 +32,14 @@ if (inputPort) {
   const portReg = /^([0-9]|[1-9]\d|[1-9]\d{2}|[1-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/;
   if (portReg.test(inputPort)) {
     if (checkWebRootDirectoryExist()) {
-      server.run();
+      server.run(inputPort);
     } else {
       console.log('Please wait...');
       exec('react-app-rewired build', (err, stdout, stderr) => {
         if (err) {
           console.log('err');
         } else {
-          server.run();
+          server.run(inputPort);
         }
       });
     }
