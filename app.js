@@ -39,6 +39,7 @@ if (inputPort) {
         if (err) {
           console.log('err');
         } else {
+          console.log('Build completed.');
           server.run(inputPort);
         }
       });

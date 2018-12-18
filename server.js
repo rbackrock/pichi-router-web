@@ -21,7 +21,7 @@ exports.run = (port) => {
   app.use('/api', proxyOption);
 
   const server = app.listen(0, () => {
-    console.log('pichi ui is running...');
+    console.log('Congratulations!');
     console.log(`Please visit: http://localhost:${server.address().port} or http://[::1]:${server.address().port}`);
     require('opn')(`http://localhost:${server.address().port}/`);
   });
