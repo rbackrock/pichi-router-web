@@ -1,5 +1,4 @@
 import ajax from 'axios';
-import { storage } from '@common/utils';
 import _ from 'lodash';
 
 const globalConfig = {
@@ -9,14 +8,8 @@ const globalConfig = {
 const ajaxInstance = ajax.create(globalConfig);
 
 ajaxInstance.interceptors.request.use(config => {
-  const baseUrl = storage.session.get('baseUrl');
-
-  if (baseUrl) {
-    config.baseURL = baseUrl;
-    return config;
-  } else {
-    return Promise.reject();
-  }
+  config.baseURL = '/api';
+  return config;
 }, error => {
   return Promise.reject(error);
 });
