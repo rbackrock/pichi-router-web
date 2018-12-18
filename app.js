@@ -37,7 +37,7 @@ if (inputPort) {
       console.log('Please wait...');
       exec('react-app-rewired build', (err, stdout, stderr) => {
         if (err) {
-          console.log('err');
+          console.log(err);
         } else {
           console.log('Build completed.');
           server.run(inputPort);
