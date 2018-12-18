@@ -4,6 +4,9 @@
 
 主体由 React16 + Router4 + Redux + Antd 实现
 
+## 环境
+Node.js v10.x 以上
+
 ## 运行
 首先确保 Pichi 项目已经成功运行
 
