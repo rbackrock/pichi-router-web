@@ -11,7 +11,7 @@ program
 .option('-p, --p [port]', 'pichi port')
 .parse(process.argv);
 
-const inputPort = program.p;
+const inputPort = program.p ? program.p :  process.argv[2];
 
 function checkWebRootDirectoryExist() {
   const webPath = path.join(__dirname, 'build');
