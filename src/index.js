@@ -4,7 +4,6 @@ import store from "@src/store";
 import Router from "@router/router";
 import Provider from "react-redux/es/components/Provider";
 import '@src/index.css';
-import '@src/initialization'
 
 const App = (props) => {
   return (
