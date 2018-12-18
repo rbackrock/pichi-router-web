@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  HashRouter,
+  BrowserRouter,
   Switch,
   Route,
   Redirect,
@@ -16,7 +16,7 @@ import Rules from '@pages/rules';
 
 const Router = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <App>
         <Switch>
           <Route
@@ -38,7 +38,7 @@ const Router = () => {
           />
         </Switch>
       </App>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
