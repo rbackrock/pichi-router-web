@@ -4,7 +4,7 @@ const program = require('commander');
 const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
-const server = require('./server');
+const server = require('../config/server');
 
 program
 .version('0.0.1')
@@ -14,7 +14,7 @@ program
 const inputPort = program.p ? program.p : process.argv[2];
 
 function checkWebRootDirectoryExist() {
-  const webPath = path.join(__dirname, 'build');
+  const webPath = `${process.cwd()}/build`;
   try {
     return fs.statSync(webPath).isDirectory();
   }catch (e) {

@@ -1,7 +1,7 @@
 const proxy = require('http-proxy-middleware');
 const fs = require('fs');
 
-const proxyConfigPath = `${process.cwd()}/proxy-config.json`;
+const proxyConfigPath = `${process.cwd()}/config/proxy-config.json`;
 let proxyConfig = {};
 
 try {

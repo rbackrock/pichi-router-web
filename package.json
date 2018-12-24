@@ -26,11 +26,11 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "dev": "node ./dev-web.js",
+    "dev": "node ./scripts/dev-web.js",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
-    "start": "node ./app.js"
+    "start": "node ./scripts/app.js"
   },
   "eslintConfig": {
     "extends": "react-app"
