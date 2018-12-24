@@ -80,12 +80,11 @@ class EgressesForm extends PureComponent {
     const ignoreFieldList = {
       http: ['password', 'method'],
       socks5: ['password', 'method'],
-      direct: ['password', 'method'],
+      direct: ['password', 'method', 'port'],
       reject: ['password', 'method'],
       ss: []
     };
     const ignoreFormItemList = ignoreFieldList[this.props.adapterType];
-
     const formItemCommonLayout = {
       labelCol: {
         span: 4
@@ -120,10 +119,10 @@ class EgressesForm extends PureComponent {
         fieldDecorator: {
           fieldName: 'host',
           opts: {
-            rules: formRules.host
+            rules: formRules.host(this.props.adapterType !== 'direct')
           }
         },
-        renderItem: <Input placeholder="Please input host, support ipv6." addonBefore={this.renderAdapterTypeSelector()} />
+        renderItem: <Input disabled={this.props.adapterType === 'direct'} placeholder="Please input host, support ipv6." addonBefore={this.renderAdapterTypeSelector()} />
       },
       {
         name: 'port',
@@ -191,6 +190,7 @@ class EgressesForm extends PureComponent {
 
   handleAdapterTypeOnSelect(val) {
     this.actions.changeEgressesFormAdapterType(val);
+    this.props.form.resetFields();
   }
 }
 
