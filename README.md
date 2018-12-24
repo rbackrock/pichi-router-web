@@ -7,9 +7,36 @@
 ## 环境
 推荐 Node.js v10.x 以上
 
-## 运行
+## 执行前提
 首先确保 Pichi 项目已经成功运行
 
-在项目根目录执行
+## 运行
+如果你想要开始用该项目操作 Pichi
 
 `yarn run start -p [pichi的端口号]` 或者 `npm run start -p [pichi的端口号]` 
+
+如果你想要修改
+
+`yarn run dev -p [pichi的端口号]` 或者 `npm run dev -p [pichi的端口号]`
+
+如果你想要构建出页面，部署在自己的 Nginx 服务器
+
+`yarn run build` 或者 `yarn run build`
+
+Nginx 对应简单配置例子如下：
+
+```
+server {
+    listen 8082;
+    root /Users/rbackrock/Code/frontend/pichi-router-web/build;
+    index index.html;
+  
+    location / {
+      try_files $uri $uri/ /index.html;
+    }
+  
+    location /api/ {
+      proxy_pass http://localhost:8000/;
+    }
+  } 
+```
