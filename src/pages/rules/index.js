@@ -2,7 +2,7 @@ import React, { Fragment, PureComponent } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import Antd, {Divider, Form, message, Modal, Table} from "antd";
+import Antd, {Divider, Form, message, Modal, Table, Card, Row, Col} from "antd";
 import * as actionCreator from "../rules/store/actionCreator";
 import RulesForm from '../rules/components/rulesForm';
 import { helper } from '@common/utils';
@@ -19,7 +19,7 @@ class Rules extends PureComponent {
       {
         title: 'Name',
         dataIndex: 'name',
-        className: 'column-center',
+        className: 'column-left',
         render: name => {
           return name || '-';
         }
@@ -29,13 +29,7 @@ class Rules extends PureComponent {
         dataIndex: 'range',
         className: 'column-center',
         render: ipRange => {
-          if (ipRange && _.isArray(ipRange)) {
-            return ipRange.map(ip => (
-              <div key={ip}>{ip}</div>
-            ));
-          } else {
-            return '-'
-          }
+          return '';
         }
       },
       {
@@ -43,13 +37,7 @@ class Rules extends PureComponent {
         dataIndex: 'ingress_name',
         className: 'column-center',
         render: ingressName => {
-          if (ingressName && _.isArray(ingressName)) {
-            return ingressName.map(ingressName => (
-              <div key={ingressName}>{ingressName}</div>
-            ));
-          } else {
-            return '-'
-          }
+          return '';
         }
       },
       {
@@ -57,13 +45,7 @@ class Rules extends PureComponent {
         dataIndex: 'ingress_type',
         className: 'column-center',
         render: ingressType => {
-          if (ingressType && _.isArray(ingressType)) {
-            return ingressType.map(ingressType => (
-              <div key={ingressType}>{ingressType}</div>
-            ));
-          } else {
-            return '-'
-          }
+          return '';
         }
       },
       {
@@ -71,13 +53,7 @@ class Rules extends PureComponent {
         dataIndex: 'pattern',
         className: 'column-center',
         render: pattern => {
-          if (pattern && _.isArray(pattern)) {
-            return pattern.map(pattern => (
-              <div key={pattern}>{pattern}</div>
-            ));
-          } else {
-            return '-'
-          }
+          return '';
         }
       },
       {
@@ -85,13 +61,7 @@ class Rules extends PureComponent {
         dataIndex: 'domain',
         className: 'column-center',
         render: domain => {
-          if (domain && _.isArray(domain)) {
-            return domain.map(domain => (
-              <div key={domain}>{domain}</div>
-            ));
-          } else {
-            return '-'
-          }
+          return '';
         }
       },
       {
@@ -99,13 +69,7 @@ class Rules extends PureComponent {
         dataIndex: 'country',
         className: 'column-center',
         render: countryCode => {
-          if (countryCode && _.isArray(countryCode)) {
-            return countryCode.map(countryCode => (
-              <div key={countryCode}>{countryCode}</div>
-            ));
-          } else {
-            return '-'
-          }
+          return '';
         }
       },
       {
@@ -147,10 +111,91 @@ class Rules extends PureComponent {
         </div>
         <Table
           columns={this.cols}
-          bordered
+          showHeader={false}
           rowKey="name"
           dataSource={this.props.rulesList.toJS()}
           loading={this.props.fetchRulesPending}
+          expandedRowRender={record => {
+            const ipRange = record.range && _.isArray(record.range) ? record.range : [];
+            const ingressName = record.ingress_name && _.isArray(record.ingress_name) ? record.ingress_name : [];
+            const ingressType = record.ingress_type && _.isArray(record.ingress_type) ? record.ingress_type : [];
+            const pattern = record.pattern && _.isArray(record.pattern) ? record.pattern : [];
+            const domain = record.domain && _.isArray(record.domain) ? record.domain : [];
+            const country = record.country && _.isArray(record.country) ? record.country : [];
+
+            return (
+              <Fragment>
+                <Row gutter={16}>
+                  {
+                    ipRange.length > 0 ? (
+                      <Col span={4}>
+                        <Card title="IP Range" bordered={true} >
+                          {
+                            ipRange.map((item, index) => (<p key={index}>{item}</p>))
+                          }
+                        </Card>
+                      </Col>
+                    ) : null
+                  }
+                  {
+                    ingressName.length > 0 ? (
+                      <Col span={4}>
+                        <Card title="Ingress Name" bordered={true} >
+                          {
+                            ingressName.map((item, index) => (<p key={index}>{item}</p>))
+                          }
+                        </Card>
+                      </Col>
+                    ) : null
+                  }
+                  {
+                    ingressType.length > 0 ? (
+                      <Col span={4}>
+                        <Card title="Ingress Type" bordered={true} >
+                          {
+                            ingressType.map((item, index) => (<p key={index}>{item}</p>))
+                          }
+                        </Card>
+                      </Col>
+                    ) : null
+                  }
+                  {
+                    pattern.length > 0 ? (
+                      <Col span={4}>
+                        <Card title="Pattern" bordered={true} >
+                          {
+                            pattern.map((item, index) => (<p key={index}>{item}</p>))
+                          }
+                        </Card>
+                      </Col>
+                    ) : null
+                  }
+                  {
+                    domain.length > 0 ? (
+                      <Col span={4}>
+                        <Card title="Domain" bordered={true} >
+                          {
+                            domain.map((item, index) => (<p key={index}>{item}</p>))
+                          }
+                        </Card>
+                      </Col>
+                    ) : null
+                  }
+                  {
+                    country.length > 0 ? (
+                      <Col span={4}>
+                        <Card title="Country" bordered={true} >
+                          {
+                            country.map((item, index) => (<p key={index}>{item}</p>))
+                          }
+                        </Card>
+                      </Col>
+                    ) : null
+                  }
+                </Row>
+              </Fragment>
+            );
+          }}
         >
         </Table>
         <RulesFormModal
