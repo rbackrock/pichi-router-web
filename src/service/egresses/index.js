@@ -4,7 +4,18 @@ import { helper } from '@common/utils';
 export const getEgressesList = () => {
   return new Promise((resolve, reject) => {
     axios.get('/egresses').then(rsp => {
-      const egressesData = helper.convertObjectsToArray(rsp.data, ['direct']);
+      const DEFAULT_EGRESS_NAME = 'direct';
+      const egressesData = helper.convertObjectsToArray(rsp.data);
+
+      // 不管有多少出口，让默认给的 direct 排在第一
+      for (let i = 0, currEgress = {}; i < egressesData.length; i++) {
+        let currEgress = egressesData[i];
+        if (currEgress.name === DEFAULT_EGRESS_NAME) {
+          helper.swapArrayItem(egressesData, i, 0);
+          break;
+        }
+      }
+
       resolve(egressesData);
     }, error => reject(error));
   });
