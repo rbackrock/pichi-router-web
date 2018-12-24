@@ -14,8 +14,7 @@ export function delayFunction(fn) {
 
 export function swapArrayItem(arr, originIndex, newIndex) {
   const originVal = arr[originIndex];
-  const newVal = arr[newIndex];
-  arr[originIndex] = newVal;
+  arr[originIndex] = arr[newIndex];
   arr[newIndex] = originVal;
 
   return arr;
