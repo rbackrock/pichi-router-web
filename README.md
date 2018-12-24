@@ -7,7 +7,7 @@
 ## 环境
 推荐 Node.js v10.x 以上
 
-确保 Pichi 项目已经成功运行
+确保 [Pichi](https://github.com/pichi-router/pichi) 项目已经成功运行
 
 ## 运行
 如果你想要开始用该项目操作 Pichi
