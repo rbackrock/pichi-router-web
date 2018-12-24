@@ -5,7 +5,7 @@ import * as rulesService from '@service/rules';
 export const getRoutesList = () => {
   return new Promise((resolve, reject) => {
     Promise.all([egressesService.getEgressesList(), rulesService.getRulesList(), axios.get('/route')]).then(result => {
-      const egressesList = ['direct'].concat(result[0].map(egress => egress.name)); // 得到目前所有的 egress 的名称
+      const egressesList = result[0].map(egress => egress.name); // 得到目前所有的 egress 的名称
       const rulesList = result[1].map(rule => rule.name); // 得到目前所有的 rules 的名称
       const routeData = result[2].data;
       const defaultEgress = routeData['default'];
