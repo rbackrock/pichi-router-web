@@ -7,12 +7,14 @@ export const name = [
   }
 ];
 
-export const host = [
-  {
-    required: true,
-    whitespace: true
-  }
-];
+export function host(required) {
+  return [
+    {
+      required: required,
+      whitespace: true
+    }
+  ];
+}
 
 export const port = [
   {
