@@ -6,3 +6,8 @@ th.column-center,
 td.column-center {
   text-align: center !important;
 }
+
+th.column-left,
+td.column-left {
+  text-align: left !important;
+}
