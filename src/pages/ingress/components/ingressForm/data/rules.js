@@ -18,7 +18,9 @@ export const port = [
   {
     required: true,
     type: 'integer',
-    whitespace: true
+    whitespace: true,
+    min: 1,
+    max: 65535
   }
 ];
 
