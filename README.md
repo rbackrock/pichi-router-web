@@ -27,16 +27,16 @@ Nginx 对应简单配置例子如下：
 
 ```
 server {
-    listen 8082;
-    root /Users/rbackrock/Code/frontend/pichi-router-web/build;
-    index index.html;
-  
-    location / {
-      try_files $uri $uri/ /index.html;
-    }
-  
-    location /api/ {
-      proxy_pass http://localhost:8000/;
-    }
-  } 
+  listen 8082;
+  root /Users/rbackrock/Code/frontend/pichi-router-web/build;
+  index index.html;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+
+  location /api/ {
+    proxy_pass http://localhost:8000/;
+  }
+}
 ```
