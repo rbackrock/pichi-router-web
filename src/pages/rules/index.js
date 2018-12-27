@@ -123,13 +123,18 @@ class Rules extends PureComponent {
             const domain = record.domain && _.isArray(record.domain) ? record.domain : [];
             const country = record.country && _.isArray(record.country) ? record.country : [];
 
+            const cardStyle = {
+              wordWrap: 'break-word',
+              wordBreak: 'normal'
+            };
+
             return (
               <Fragment>
                 <Row gutter={16}>
                   {
                     ipRange.length > 0 ? (
                       <Col span={4}>
-                        <Card title="IP Range" bordered={true} >
+                        <Card title="IP Range" bordered={true} style={cardStyle}>
                           {
                             ipRange.map((item, index) => (<p key={index}>{item}</p>))
                           }
@@ -140,7 +145,7 @@ class Rules extends PureComponent {
                   {
                     ingressName.length > 0 ? (
                       <Col span={4}>
-                        <Card title="Ingress Name" bordered={true} >
+                        <Card title="Ingress Name" bordered={true} style={cardStyle}>
                           {
                             ingressName.map((item, index) => (<p key={index}>{item}</p>))
                           }
@@ -151,7 +156,7 @@ class Rules extends PureComponent {
                   {
                     ingressType.length > 0 ? (
                       <Col span={4}>
-                        <Card title="Ingress Type" bordered={true} >
+                        <Card title="Ingress Type" bordered={true} style={cardStyle}>
                           {
                             ingressType.map((item, index) => (<p key={index}>{item}</p>))
                           }
@@ -162,7 +167,7 @@ class Rules extends PureComponent {
                   {
                     pattern.length > 0 ? (
                       <Col span={4}>
-                        <Card title="Pattern" bordered={true} >
+                        <Card title="Pattern" bordered={true} style={cardStyle}>
                           {
                             pattern.map((item, index) => (<p key={index}>{item}</p>))
                           }
@@ -173,18 +178,18 @@ class Rules extends PureComponent {
                   {
                     domain.length > 0 ? (
                       <Col span={4}>
-                        <Card title="Domain" bordered={true} >
+                        <Card title="Domain" bordered={true} style={cardStyle}>
                           {
                             domain.map((item, index) => (<p key={index}>{item}</p>))
                           }
                         </Card>
                       </Col>
-                    ) : null
+                    ) :  null
                   }
                   {
                     country.length > 0 ? (
                       <Col span={4}>
-                        <Card title="Country" bordered={true} >
+                        <Card title="Country" bordered={true} style={cardStyle}>
                           {
                             country.map((item, index) => (<p key={index}>{item}</p>))
                           }
