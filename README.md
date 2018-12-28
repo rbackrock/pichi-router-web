@@ -22,7 +22,7 @@
 
 `yarn run build` 或者 `yarn run build`
 
-根目录下的 build 文件夹就是你的 Web 项目文件夹，拷贝到设置好的 Nginx 对应 Web 目录重启 Nginx 就可以了
+根目录下会自动构建 build 文件夹，把它拷贝到设置好的 Nginx 对应 Web 目录重启 Nginx 就可以了
 
 Nginx 对应简单配置例子如下：
 
