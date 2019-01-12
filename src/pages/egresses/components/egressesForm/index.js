@@ -5,6 +5,7 @@ import { actionCreator } from '../../store';
 import {Form, Input, InputNumber, Modal, Select} from "antd";
 import egressesAdapterTypeList from '@common/resource/egressesAdapterType'
 import cryptoMethodList from '@common/resource/cryptoMethod';
+import egressesModeList from '@common/resource/egressesMode'
 import * as formRules from './data/rules';
 
 const FormItem = Form.Item;
@@ -17,6 +18,7 @@ class EgressesForm extends PureComponent {
 
     this.renderFormItem = this.renderFormItem.bind(this);
     this.handleAdapterTypeOnSelect = this.handleAdapterTypeOnSelect.bind(this);
+    this.handleRejectModeType = this.handleRejectModeType.bind(this);
   }
 
   render() {
@@ -61,7 +63,7 @@ class EgressesForm extends PureComponent {
   renderAdapterTypeSelector() {
     if (egressesAdapterTypeList.length > 0) {
       return this.props.form.getFieldDecorator('type', {
-        initialValue: egressesAdapterTypeList[0],
+        initialValue: this.props.adapterType,
       })(
         <Select onSelect={this.handleAdapterTypeOnSelect} style={{ width: 90 }}>
           {
@@ -76,13 +78,27 @@ class EgressesForm extends PureComponent {
     return null;
   }
 
+  renderModeSelector() {
+    return this.props.form.getFieldDecorator('mode', {
+      initialValue: this.props.modeType,
+    })(
+      <Select onSelect={this.handleRejectModeType} style={{ width: 100 }}>
+        {
+          egressesModeList.map(item => {
+            return <Option key={item} value={item}>{item}</Option>
+          })
+        }
+      </Select>
+    );
+  }
+
   renderFormItem() {
     const ignoreFieldList = {
-      http: ['password', 'method'],
-      socks5: ['password', 'method'],
-      direct: ['password', 'method', 'port'],
-      reject: ['password', 'method'],
-      ss: []
+      http: ['password', 'method', 'mode'],
+      socks5: ['password', 'method', 'mode'],
+      direct: ['password', 'method', 'port', 'mode'],
+      reject: ['password', 'method', 'port'],
+      ss: ['mode']
     };
     const ignoreFormItemList = ignoreFieldList[this.props.adapterType];
     const formItemCommonLayout = {
@@ -94,6 +110,21 @@ class EgressesForm extends PureComponent {
       }
     };
     const formItemConfig = [
+      {
+        name: 'host',
+        formItemCommonLayout,
+        item: {
+          key: 'Host',
+          label: 'Host'
+        },
+        fieldDecorator: {
+          fieldName: 'host',
+          opts: {
+            rules: formRules.host(!(this.props.adapterType === 'direct' || this.props.adapterType === 'reject'))
+          }
+        },
+        renderItem: <Input disabled={this.props.adapterType === 'direct' || this.props.adapterType === 'reject'} placeholder="Please input host, support ipv6." addonBefore={this.renderAdapterTypeSelector()} />
+      },
       {
         name: 'name',
         formItemCommonLayout,
@@ -108,21 +139,6 @@ class EgressesForm extends PureComponent {
           }
         },
         renderItem: <Input placeholder="Please input egresses name." />
-      },
-      {
-        name: 'host',
-        formItemCommonLayout,
-        item: {
-          key: 'Host',
-          label: 'Host'
-        },
-        fieldDecorator: {
-          fieldName: 'host',
-          opts: {
-            rules: formRules.host(this.props.adapterType !== 'direct')
-          }
-        },
-        renderItem: <Input disabled={this.props.adapterType === 'direct'} placeholder="Please input host, support ipv6." addonBefore={this.renderAdapterTypeSelector()} />
       },
       {
         name: 'port',
@@ -176,7 +192,22 @@ class EgressesForm extends PureComponent {
             }
           </Select>
         )
-      }
+      },
+      {
+        name: 'mode',
+        formItemCommonLayout,
+        item: {
+          key: 'Mode',
+          label: 'Mode'
+        },
+        fieldDecorator: {
+          fieldName: 'delay',
+          opts: {
+            rules: formRules.delay(this.props.modeType === 'fixed')
+          },
+        },
+        renderItem: <Input disabled={this.props.modeType === 'random'} placeholder="Please input delay." addonBefore={this.renderModeSelector()} />
+      },
     ];
     const willFormItemList = [];
     for (let formItem of formItemConfig) {
@@ -192,11 +223,17 @@ class EgressesForm extends PureComponent {
     this.actions.changeEgressesFormAdapterType(val);
     this.props.form.resetFields();
   }
+
+  handleRejectModeType(val) {
+    this.actions.changeEgressesFormModeType(val);
+    // this.props.form.resetFields();
+  }
 }
 
 const stateMapToProps = (state) => {
   return {
-    adapterType: state.getIn(['egresses', 'adapterType'])
+    adapterType: state.getIn(['egresses', 'adapterType']),
+    modeType: state.getIn(['egresses', 'modeType']),
   }
 };
 

@@ -38,3 +38,28 @@ export const method = [
     required: true
   }
 ];
+
+export function delay(required) {
+  return [
+    {
+      required: required,
+      whitespace: true,
+      validator: (rule, value, callback) => {
+        if (required) {
+          if (/^\d+$/.test(value)) {
+            const val = Number(value);
+            if (val >= 0 && val <= 300) {
+              callback();
+            } else {
+              callback('delay must be between 0 and 300');
+            }
+          } else {
+            callback('delay must be of type number and an integer');
+          }
+        } else {
+          callback();
+        }
+      }
+    }
+  ];
+}
