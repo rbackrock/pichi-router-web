@@ -8,7 +8,7 @@ export const getEgressesList = () => {
       const egressesData = helper.convertObjectsToArray(rsp.data);
 
       // 不管有多少出口，让默认给的 direct 排在第一
-      for (let i = 0, currEgress = {}; i < egressesData.length; i++) {
+      for (let i = 0; i < egressesData.length; i++) {
         let currEgress = egressesData[i];
         if (currEgress.name === DEFAULT_EGRESS_NAME) {
           helper.swapArrayItem(egressesData, i, 0);
@@ -32,7 +32,9 @@ export const saveEgresses = (formData) => {
     host: reqBody.host,
     port: reqBody.port,
     password: reqBody.password,
-    method: reqBody.method
+    method: reqBody.method,
+    mode: reqBody.mode,
+    delay: reqBody.delay
   } = formData);
 
   return axios.put(`/egresses/${formData.name}`, reqBody);
