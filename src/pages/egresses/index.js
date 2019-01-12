@@ -57,6 +57,22 @@ class Egresses extends PureComponent {
         }
       },
       {
+        title: 'Reject Mode',
+        dataIndex: 'mode',
+        className: 'column-center',
+        render: (text) => {
+          return text || '-';
+        }
+      },
+      {
+        title: 'Reject Delay',
+        dataIndex: 'delay',
+        className: 'column-center',
+        render: (text) => {
+          return text || '-';
+        }
+      },
+      {
         title: 'Operation',
         className: 'column-center',
         render: (text, record) => (
@@ -139,6 +155,9 @@ class Egresses extends PureComponent {
     const form = this.formRef.props.form;
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        if (values.delay) {
+          values.delay = Number(values.delay)
+        }
         this.actions.saveEgresses(values).then(rsp => {
           message.success('successfully');
           form.resetFields();
