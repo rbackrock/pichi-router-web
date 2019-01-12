@@ -11,6 +11,11 @@ export const changeEgressesFormAdapterType = (adapterType) => ({
   adapterType
 });
 
+export const changeEgressesFormModeType = (modeType) => ({
+  type: actionTypes.CHANGE_EGRESSES_FORM_MODE_TYPE,
+  modeType
+});
+
 export function fetchEgresses() {
   return dispatch => {
     dispatch({

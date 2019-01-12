@@ -1,10 +1,12 @@
 import * as actionTypes from './actionTypes';
 import { fromJS } from 'immutable';
 import egressesAdapterTypeList from '@common/resource/egressesAdapterType';
+import egressesModeList from '@common/resource/egressesMode';
 
 const defaultState = fromJS({
   egressesFormModalVisible: false,
   adapterType: egressesAdapterTypeList[0],
+  modeType: egressesModeList[0],
 
   fetchEgressesListPending: false,
   fetchEgressesError: null,
@@ -23,6 +25,8 @@ export default (state = defaultState, action) => {
       return state.set('egressesFormModalVisible', action.isVisible);
     case actionTypes.CHANGE_EGRESSES_FORM_ADAPTER_TYPE:
       return state.set('adapterType', action.adapterType);
+    case actionTypes.CHANGE_EGRESSES_FORM_MODE_TYPE:
+      return state.set('modeType', action.modeType);
     case actionTypes.FETCH_EGRESSES_BEGIN:
       return state.merge({
         fetchEgressesListPending: true,

@@ -1,5 +1,6 @@
 export const CHANGE_EGRESSES_FORM_MODAL_VISIBLE = 'egresses/change_egresses_form_modal_visible';
 export const CHANGE_EGRESSES_FORM_ADAPTER_TYPE = 'egresses/change_egresses_form_adapter_type';
+export const CHANGE_EGRESSES_FORM_MODE_TYPE = 'egresses/change_egresses_form_mode_type';
 
 export const FETCH_EGRESSES_BEGIN = 'egresses/fetch_egresses_begin';
 export const FETCH_EGRESSES_SUCCESS = 'egresses/fetch_egresses_success';
