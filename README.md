@@ -20,7 +20,7 @@
 
 如果你想要构建出页面，然后部署在自己的 Nginx 服务器
 
-`yarn run build` 或者 `yarn run build`
+`yarn run build` 或者 `npm run build`
 
 根目录下会自动构建 build 文件夹，把它拷贝到设置好的 Nginx 对应 Web 目录重启 Nginx 就可以了
 
