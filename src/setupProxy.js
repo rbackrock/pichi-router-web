@@ -6,8 +6,8 @@ let proxyConfig = {};
 
 try {
   proxyConfig = JSON.parse(fs.readFileSync(proxyConfigPath).toString());
-}catch (e) {
-  console.log(e);
+} catch (e) {
+  console.error(e);
 }
 
 module.exports = function(app) {
