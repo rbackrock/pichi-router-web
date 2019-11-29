@@ -17,7 +17,9 @@ export const saveIngress = (formData) => {
     bind: reqBody.bind,
     port: reqBody.port,
     password: reqBody.password,
-    method: reqBody.method
+    method: reqBody.method,
+    destinations: reqBody.destinations,
+    balance: reqBody.balance
   } = formData);
 
   return axios.put(`/ingresses/${formData.name}`, reqBody);

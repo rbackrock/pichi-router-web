@@ -6,13 +6,15 @@ import {
   Form,
   Input,
   InputNumber,
-  Select
+  Select,
+  Radio
 } from 'antd';
 import { actionCreator } from '../../store';
 import * as formRules from './data/rules';
 import ingressAdapterTypeList from '@common/resource/ingressAdapterType';
 import cryptoMethodList from '@common/resource/cryptoMethod';
-
+import balanceTypeList from '@common/resource/ingressBalanceType.js';
+import DestinationsFormItem from './destinationsFormItem';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -20,12 +22,18 @@ const Option = Select.Option;
 class IngressRecordForm extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      certFileDisabled: true,
+      keyFileDisabled: true,
+      certFileRequired: false,
+      keyFileRequire: false
+    };
 
     this.actions = this.props.actions;
-
     this.renderFormItem = this.renderFormItem.bind(this);
     this.renderAdapterTypeSelector = this.renderAdapterTypeSelector.bind(this);
     this.handleAdapterTypeOnSelect = this.handleAdapterTypeOnSelect.bind(this);
+    this.handleToggleTlsChange = this.handleToggleTlsChange.bind(this);
   }
 
   render() {
@@ -44,21 +52,25 @@ class IngressRecordForm extends PureComponent {
         okText="Save"
         onCancel={onCancel}
         onOk={onOK}
-        width={550}
+        width={690}
         centered={true}
         destroyOnClose={true}
         afterClose={ () => this.actions.changeIngressFormAdapterType(ingressAdapterTypeList[0]) }>
         <Form layout="horizontal" >
           {
             this.renderFormItem().map(formItemConfig => {
-              let { fieldName, opts } = formItemConfig.fieldDecorator;
-              return (
-                <FormItem {...formItemConfig.item} {...formItemConfig.formItemCommonLayout}>
-                  {
-                    getFieldDecorator(fieldName, opts)(formItemConfig.renderItem)
-                  }
-                </FormItem>
-              )
+              if (formItemConfig.fieldDecorator) {
+                let { fieldName, opts } = formItemConfig.fieldDecorator;
+                return (
+                  <FormItem {...formItemConfig.item} {...formItemConfig.formItemCommonLayout}>
+                    {
+                      getFieldDecorator(fieldName, opts)(formItemConfig.renderItem)
+                    }
+                  </FormItem>
+                )
+              } else {
+                return formItemConfig.renderItem
+              }
             })
           }
         </Form>
@@ -86,9 +98,10 @@ class IngressRecordForm extends PureComponent {
 
   renderFormItem() {
     const ignoreFieldList = {
-      http: ['password', 'method'],
-      socks5: ['password', 'method'],
-      ss: []
+      http: ['password', 'method', 'destinationList', 'balance'],
+      tunnel: ['password', 'method', 'tls', 'cert_file', 'key_file'],
+      socks5: ['password', 'method', 'destinationList', 'balance'],
+      ss: ['destinationList', 'balance', 'tls', 'cert_file', 'key_file']
     };
     const ignoreFormItemList = ignoreFieldList[this.props.adapterType];
     const formItemCommonLayout = {
@@ -97,6 +110,12 @@ class IngressRecordForm extends PureComponent {
       },
       wrapperCol: {
         span: 20
+      }
+    };
+    const formItemLayoutWithOutLabel = {
+      wrapperCol: {
+        span: 20,
+        offset: 4
       }
     };
     const formItemConfig = [
@@ -182,6 +201,91 @@ class IngressRecordForm extends PureComponent {
             }
           </Select>
         )
+      },
+      {
+        name: 'balance',
+        formItemCommonLayout,
+        item: {
+          key: 'balance',
+          label: 'Balance',
+        },
+        fieldDecorator: {
+          fieldName: 'balance',
+          opts: {
+            rules: formRules.balance
+          }
+        },
+        renderItem: (
+          <Select placeholder="Please select a balance type.">
+            {
+              balanceTypeList.map(item => (
+                <Option key={item} value={item}>{item}</Option>
+              ))
+            }
+          </Select>
+        )
+      },
+      {
+        name: 'destinationList',
+        type: 'complex',
+        renderItem: (
+          <DestinationsFormItem
+            formItemCommonLayout={formItemCommonLayout}
+            formItemLayoutWithOutLabel={formItemLayoutWithOutLabel}
+            key={'destination'}
+            form={this.props.form}
+          />
+        )
+      },
+      {
+        name: 'tls',
+        formItemCommonLayout,
+        item: {
+          key: 'tls',
+          label: 'Tls'
+        },
+        fieldDecorator: {
+          fieldName: 'tls',
+          opts: {
+            initialValue: false
+          }
+        },
+        renderItem: (
+          <Radio.Group onChange={this.handleToggleTlsChange} disabled={this.state.tlsDisabled}>
+            <Radio value={true}>Yes</Radio>
+            <Radio value={false}>No</Radio>
+          </Radio.Group>
+        )
+      },
+      {
+        name: 'cert_file',
+        formItemCommonLayout,
+        item: {
+          key: 'cert_file',
+          label: 'CertFile'
+        },
+        fieldDecorator: {
+          fieldName: 'cert_file',
+          opts: {
+            rules: [{ required: this.state.certFileRequired }]
+          }
+        },
+        renderItem: <Input disabled={this.state.certFileDisabled} placeholder="Please input cert file path." autoComplete="true" />
+      },
+      {
+        name: 'key_file',
+        formItemCommonLayout,
+        item: {
+          key: 'key_file',
+          label: 'KeyFile'
+        },
+        fieldDecorator: {
+          fieldName: 'key_file',
+          opts: {
+            rules: [{ required: this.state.keyFileRequire }]
+          }
+        },
+        renderItem: <Input disabled={this.state.keyFileDisabled} placeholder="Please input key file path." autoComplete="true" />
       }
     ];
     const willFormItemList = [];
@@ -195,7 +299,18 @@ class IngressRecordForm extends PureComponent {
   }
 
   handleAdapterTypeOnSelect(val) {
+    this.props.form.resetFields();
     this.actions.changeIngressFormAdapterType(val);
+  }
+
+  handleToggleTlsChange(evt) {
+    this.props.form.resetFields(['cert_file', 'key_file']);
+    this.setState({
+      certFileDisabled: !evt.target.value,
+      keyFileDisabled: !evt.target.value,
+      certFileRequired: evt.target.value,
+      keyFileRequire: evt.target.value
+    });
   }
 }
 

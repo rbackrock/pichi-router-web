@@ -36,3 +36,29 @@ export const method = [
     required: true
   }
 ];
+
+export const destinations = [
+  {
+    required: true,
+    type: 'integer',
+    whitespace: true
+  }
+];
+
+export const balance = [
+  {
+    required: true
+  }
+];
+
+export const cert_file = [
+  {
+    required: true
+  }
+];
+
+export const key_file = [
+  {
+    required: true
+  }
+];

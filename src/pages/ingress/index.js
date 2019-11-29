@@ -1,6 +1,8 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
+import uuid from 'uuid/v1';
 import { actionCreator } from './store';
 import Antd, {
   Table,
@@ -139,6 +141,13 @@ class Ingress extends PureComponent {
     const form = this.formRef.props.form;
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        if (values.destination && values.destination.length > 0) {
+          values.destinations = {};
+          for (let val of values.destination) {
+            values.destinations[val[0]] = val[1];
+          }
+        }
+
         this.actions.saveIngress(values).then(() => {
           message.success('successfully');
           form.resetFields();
@@ -184,7 +193,35 @@ class Ingress extends PureComponent {
 
     // 因为要根据不同入口动态渲染模态框，渲染完成后才可以设置表单值，所以需要延迟
     helper.delayFunction(() => {
-      this.formRef.props.form.setFieldsValue(record);
+      // 处理数据，后端处回来的数据和 form 表单的值不一样，这里做了转换
+      if (record.destinations) {
+        const destinationKeys = this.formRef.props.form.getFieldsValue(['destinationKeys']).destinationKeys;
+
+        record.destination = [];
+        Object.keys(record.destinations).forEach(prop => {
+          if (record.destinations.hasOwnProperty(prop)) {
+            record.destination.push([prop, record.destinations[prop]]);
+          }
+        });
+
+        if (record.destination.length > 1) {
+          for (let i = 0; i < record.destination.length - 1; i++) {
+            destinationKeys.push(uuid());
+          }
+        }
+
+        this.formRef.props.form.setFieldsValue({
+          'destinationKeys': destinationKeys
+        });
+
+        helper.delayFunction(() => {
+          this.formRef.props.form.setFieldsValue(_.pickBy(record, (k, val) => {
+            return val !== 'destinations';
+          }));
+        });
+      } else {
+        this.formRef.props.form.setFieldsValue(record);
+      }
     });
   }
 }
