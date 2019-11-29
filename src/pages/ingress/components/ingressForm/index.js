@@ -22,12 +22,6 @@ const Option = Select.Option;
 class IngressRecordForm extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      certFileDisabled: true,
-      keyFileDisabled: true,
-      certFileRequired: false,
-      keyFileRequire: false
-    };
 
     this.actions = this.props.actions;
     this.renderFormItem = this.renderFormItem.bind(this);
@@ -86,7 +80,11 @@ class IngressRecordForm extends PureComponent {
         <Select onSelect={this.handleAdapterTypeOnSelect} style={{ width: 90 }}>
           {
             ingressAdapterTypeList.map(item => {
-              return <Option key={item} value={item}>{item}</Option>
+              if (item !== 'https' && item !== 'socks5s') {
+                return <Option key={item} value={item}>{item}</Option>;
+              }
+
+              return null;
             })
           }
         </Select>
@@ -98,9 +96,11 @@ class IngressRecordForm extends PureComponent {
 
   renderFormItem() {
     const ignoreFieldList = {
-      http: ['password', 'method', 'destinationList', 'balance'],
+      http: ['password', 'method', 'destinationList', 'balance', 'cert_file', 'key_file'],
+      https: ['password', 'method', 'destinationList', 'balance'],
       tunnel: ['password', 'method', 'tls', 'cert_file', 'key_file'],
-      socks5: ['password', 'method', 'destinationList', 'balance'],
+      socks5: ['password', 'method', 'destinationList', 'balance', 'cert_file', 'key_file'],
+      socks5s: ['password', 'method', 'destinationList', 'balance'],
       ss: ['destinationList', 'balance', 'tls', 'cert_file', 'key_file']
     };
     const ignoreFormItemList = ignoreFieldList[this.props.adapterType];
@@ -251,7 +251,7 @@ class IngressRecordForm extends PureComponent {
           }
         },
         renderItem: (
-          <Radio.Group onChange={this.handleToggleTlsChange} disabled={this.state.tlsDisabled}>
+          <Radio.Group onChange={this.handleToggleTlsChange}>
             <Radio value={true}>Yes</Radio>
             <Radio value={false}>No</Radio>
           </Radio.Group>
@@ -267,10 +267,10 @@ class IngressRecordForm extends PureComponent {
         fieldDecorator: {
           fieldName: 'cert_file',
           opts: {
-            rules: [{ required: this.state.certFileRequired }]
+            rules: [{ required: true }]
           }
         },
-        renderItem: <Input disabled={this.state.certFileDisabled} placeholder="Please input cert file path." autoComplete="true" />
+        renderItem: <Input placeholder="Please input cert file path." autoComplete="true" />
       },
       {
         name: 'key_file',
@@ -282,10 +282,10 @@ class IngressRecordForm extends PureComponent {
         fieldDecorator: {
           fieldName: 'key_file',
           opts: {
-            rules: [{ required: this.state.keyFileRequire }]
+            rules: [{ required: true }]
           }
         },
-        renderItem: <Input disabled={this.state.keyFileDisabled} placeholder="Please input key file path." autoComplete="true" />
+        renderItem: <Input placeholder="Please input key file path." autoComplete="true" />
       }
     ];
     const willFormItemList = [];
@@ -304,13 +304,18 @@ class IngressRecordForm extends PureComponent {
   }
 
   handleToggleTlsChange(evt) {
-    this.props.form.resetFields(['cert_file', 'key_file']);
-    this.setState({
-      certFileDisabled: !evt.target.value,
-      keyFileDisabled: !evt.target.value,
-      certFileRequired: evt.target.value,
-      keyFileRequire: evt.target.value
-    });
+    const typeVal = this.props.form.getFieldValue('type');
+    this.props.form.resetFields();
+
+    if (evt.target.value) {
+      if (typeVal === 'http') {
+        this.actions.changeIngressFormAdapterType('https');
+      } else if (typeVal === 'socks5') {
+        this.actions.changeIngressFormAdapterType('socks5s');
+      }
+    } else {
+      this.actions.changeIngressFormAdapterType(typeVal);
+    }
   }
 }
 
