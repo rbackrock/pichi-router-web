@@ -3,5 +3,7 @@ export default [
   'socks5',
   'ss',
   'direct',
-  'reject'
+  'reject',
+  'https',
+  'socks5s'
 ];
