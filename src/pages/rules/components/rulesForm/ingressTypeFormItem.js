@@ -33,9 +33,14 @@ class IngressTypeFormItem extends PureComponent {
                 })(
                   <Select placeholder="Please select a ingress adapter" style={{ width: '80%', marginRight: 8 }}>
                     {
-                      ingressAdapterTypeList.map(item => (
-                        <Option key={item} value={item}>{item}</Option>
-                      ))
+                      ingressAdapterTypeList.map(item => {
+                        const ignoreIngressTypeList = ['tunnel', 'https', 'socks5s'];
+                        if (ignoreIngressTypeList.indexOf(item) === -1) {
+                          return <Option key={item} value={item}>{item}</Option>;
+                        }
+
+                        return null;
+                      })
                     }
                   </Select>
                 )
