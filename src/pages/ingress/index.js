@@ -9,7 +9,8 @@ import Antd, {
   Divider,
   Form,
   message,
-  Modal
+  Modal,
+  Descriptions
 } from 'antd';
 import IngressRecordForm from './components/ingressForm';
 import { helper } from '@common/utils';
@@ -43,28 +44,15 @@ class Ingress extends PureComponent {
         className: 'column-center'
       },
       {
-        title: 'Method',
-        dataIndex: 'method',
-        className: 'column-center',
-        render: (text) => {
-          return text || '-';
-        }
-      },
-      {
-        title: 'Password',
-        dataIndex: 'password',
-        className: 'column-center',
-        render: (text) => {
-          return text || '-';
-        }
-      },
-      {
         title: 'Operation',
         className: 'column-center',
+        width: 230,
         render: (text, record) => (
           <span>
+            <Antd.Button size="small" onClick={(evt) => this.handleShowDetailIngress(evt, text, record)}>Detail</Antd.Button>
+            <Divider type="vertical" />
             <Antd.Button size="small" onClick={(evt) => this.handleModifyIngress(evt, text, record)}>Edit</Antd.Button>
-              <Divider type="vertical" />
+            <Divider type="vertical" />
             <Antd.Button size="small" onClick={(evt) => this.handleDeleteIngress(evt, text, record)}>Delete</Antd.Button>
           </span>
         )
@@ -82,7 +70,7 @@ class Ingress extends PureComponent {
 
   render() {
     const {
-      ingressFormModalVisible,
+      ingressFormModalVisible
     } = this.props;
     const ingressList = this.props.ingressList.toJS();
 
@@ -222,6 +210,36 @@ class Ingress extends PureComponent {
       } else {
         this.formRef.props.form.setFieldsValue(record);
       }
+    });
+  }
+
+  handleShowDetailIngress(evt, text, record) {
+    // 排序，name, type, bind, port 排前四个位置
+    const sortRecord = [undefined, undefined, undefined];
+    Object.keys(record).forEach(item => {
+      if (item === 'name') {
+        sortRecord[0] = item;
+      } else if (item === 'type') {
+        sortRecord[1] = item;
+      } else if (item === 'bind') {
+        sortRecord[2] = item;
+      } else if (item === 'port') {
+        sortRecord[3] = item;
+      } else {
+        sortRecord.push(item);
+      }
+    });
+
+    Modal.info({
+      width: 800,
+      content: (
+        <Descriptions title="Ingress detail info" bordered size={'middle'} column={2}>
+          {
+            sortRecord.map(item => item && item.length > 0 ? <Descriptions.Item key={item} label={`${_.head(item).toUpperCase()}${_.drop(item).join('')}`}>{record[item].toString()}</Descriptions.Item> : null)
+          }
+        </Descriptions>
+      ),
+      onOk() {},
     });
   }
 }
