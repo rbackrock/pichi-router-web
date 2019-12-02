@@ -19,7 +19,10 @@ export const saveIngress = (formData) => {
     password: reqBody.password,
     method: reqBody.method,
     destinations: reqBody.destinations,
-    balance: reqBody.balance
+    balance: reqBody.balance,
+    tls: reqBody.tls,
+    cert_file: reqBody.reqBody,
+    key_file: reqBody.key_file
   } = formData);
 
   return axios.put(`/ingresses/${formData.name}`, reqBody);
