@@ -298,7 +298,6 @@ class EgressesForm extends PureComponent {
   }
 
   handleAdapterTypeOnSelect(val) {
-    this.props.form.resetFields();
     this.actions.changeEgressesFormAdapterType(val);
   }
 
