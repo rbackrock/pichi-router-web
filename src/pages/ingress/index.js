@@ -143,7 +143,7 @@ class Ingress extends PureComponent {
           this.fetchIngressList();
         }, error => {
           message.error(error.errMsg);
-        })
+        });
       }
     });
   }
@@ -235,7 +235,44 @@ class Ingress extends PureComponent {
       content: (
         <Descriptions title="Ingress detail info" bordered size={'middle'} column={2}>
           {
-            sortRecord.map(item => item && item.length > 0 ? <Descriptions.Item key={item} label={`${_.head(item).toUpperCase()}${_.drop(item).join('')}`}>{record[item].toString()}</Descriptions.Item> : null)
+            sortRecord.map(item => {
+              if (item && item.length > 0) {
+                const val = record[item];
+                let textVal = null;
+
+                if (_.isArray(val)) {
+                  textVal = [];
+                  for (let value of val) {
+                    textVal.push(value);
+                  }
+                } else if (_.isObject(val)) {
+                  textVal = [];
+                  Object.keys(val).forEach(item => textVal.push(`${item} - ${val[item]}`));
+                } else {
+                  textVal = val.toString();
+                }
+
+                return (
+                  <Descriptions.Item key={item} label={`${_.head(item).toUpperCase()}${_.drop(item).join('')}`}>
+                    {
+                      _.isArray(val) ? textVal.map(v => {
+                        return <Fragment key={v}>{v}<br/></Fragment>;
+                      }) : null
+                    }
+                    {
+                      _.isObject(val) ? textVal.map(v => {
+                        return <Fragment key={v}>{v}<br/></Fragment>;
+                      }) : null
+                    }
+                    {
+                      !_.isArray(val) && !_.isObject(val) ? <Fragment>{textVal}</Fragment>: null
+                    }
+                  </Descriptions.Item>
+                );
+              } else {
+                return null;
+              }
+            })
           }
         </Descriptions>
       ),

@@ -299,7 +299,6 @@ class IngressRecordForm extends PureComponent {
   }
 
   handleAdapterTypeOnSelect(val) {
-    this.props.form.resetFields();
     this.actions.changeIngressFormAdapterType(val);
   }
 
